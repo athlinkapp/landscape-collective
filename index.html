@@ -63,7 +63,8 @@
         radial-gradient(ellipse 55% 55% at 100% 25%,  rgba( 8,  22, 14, 0.70) 0%, transparent 50%),
         radial-gradient(ellipse 100% 45% at 50% 100%, rgba( 4,  12,  8, 0.80) 0%, transparent 60%);
       position: relative;
-      overflow: hidden;
+      overflow: clip;
+      isolation: isolate;
     }
     /* Turf stripes — diagonal, very faint */
     .hero-bg::before {
@@ -111,16 +112,17 @@
 
     /* ─── NAVBAR ─── */
     #navbar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(23, 46, 31, 0.0);
+      position: relative;
+      z-index: 100;
+      background: #172e1f;
       transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
                   box-shadow  0.4s cubic-bezier(0.4,0,0.2,1),
                   backdrop-filter 0.4s;
     }
     #navbar.scrolled {
-      background: rgba(23, 46, 31, 0.96);
-      backdrop-filter: blur(16px);
-      box-shadow: 0 1px 0 rgba(200,169,106,0.12), 0 4px 32px rgba(0,0,0,0.25);
+      background: #172e1f;
+      backdrop-filter: none;
+      box-shadow: none;
     }
     .nav-link {
       position: relative;
@@ -328,11 +330,28 @@
 
     /* ─── MOBILE MENU ─── */
     #mobile-menu {
+      overflow: hidden;
       transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
-                  opacity  0.3s cubic-bezier(0.4,0,0.2,1);
+                  opacity  0.3s cubic-bezier(0.4,0,0.2,1),
+                  max-height 0.3s cubic-bezier(0.4,0,0.2,1),
+                  padding 0.3s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.3s cubic-bezier(0.4,0,0.2,1);
     }
-    #mobile-menu.hidden-menu { transform: translateY(-8px); opacity: 0; pointer-events: none; }
-    #mobile-menu.open-menu   { transform: translateY(0);    opacity: 1; pointer-events: auto; }
+    #mobile-menu.hidden-menu {
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      max-height: 0;
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+      border-top-color: transparent !important;
+    }
+    #mobile-menu.open-menu {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+      max-height: 520px;
+    }
 
     /* ─── LOGO CARDS ─── */
     .logo-card {
@@ -423,13 +442,27 @@
       flex-shrink: 0;
     }
 
+    @media (min-width: 769px) {
+      #navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: rgba(23, 46, 31, 0.0);
+      }
+      #navbar.scrolled {
+        background: rgba(23, 46, 31, 0.96);
+        backdrop-filter: blur(16px);
+        box-shadow: 0 1px 0 rgba(200,169,106,0.12), 0 4px 32px rgba(0,0,0,0.25);
+      }
+    }
+
     /* ─── SECTION PADDING ─── */
     .sec { padding: 120px 24px; }
 
     /* ─── HERO ─── */
     .hero-section {
       display: flex; align-items: center;
-      min-height: 100vh;
       padding: 120px 24px 80px;
     }
     .hero-content {
@@ -460,16 +493,48 @@
       align-items: center; gap: 8px;
     }
 
+    @media (min-width: 769px) {
+      .hero-section { min-height: 100dvh; }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       /* Kill scroll animations — blank flash on dark sections */
       .fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }
 
-      /* Hero — block layout, no flex centering, no min-height forcing a full-screen void */
-      .hero-section   { display: block; min-height: 0; padding: 96px 20px 48px; }
+      .hero-bg {
+        overflow: visible;
+      }
+      .hero-bg::before,
+      .hero-bg::after,
+      .hero-overlay,
+      .hero-glow {
+        position: absolute;
+        inset: 0;
+        transform: none !important;
+        animation: none !important;
+        filter: none !important;
+        backdrop-filter: none !important;
+      }
+      .hero-bg::after {
+        mix-blend-mode: normal;
+      }
+      .hero-glow {
+        display: none;
+      }
+
+      /* Hero — no fixed-header offset on mobile */
+      .hero-section   {
+        display: block !important;
+        min-height: 0 !important;
+        height: auto !important;
+        align-items: flex-start !important;
+        padding: 32px 20px 48px;
+      }
+      .hero-content   { margin: 0 auto !important; }
       .hero-h1        { font-size: 36px; }
       .hero-sub       { font-size: 16px; margin-bottom: 32px; }
-      .hero-scroll-cue { display: none; }
+      .hero-scroll-cue { display: none !important; }
       .hero-btn-primary, .hero-btn-secondary { padding: 13px 24px; font-size: 14px; }
 
       /* Sections */
@@ -481,7 +546,7 @@
       #chat-window   { width: min(360px, calc(100vw - 32px)) !important; }
     }
     @media (max-width: 480px) {
-      .hero-section  { padding: 88px 16px 40px; }
+      .hero-section  { padding: 24px 16px 40px !important; }
       .hero-h1       { font-size: 32px; }
       .sec           { padding: 48px 16px; }
       .footer-grid   { grid-template-columns: 1fr !important; }
@@ -1564,9 +1629,21 @@
   <script>
     // ─── NAVBAR SCROLL ───────────────────────────────────────────
     const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
+    const mobileNavbarQuery = window.matchMedia('(max-width: 768px)');
+
+    function syncNavbarScrollState() {
+      if (mobileNavbarQuery.matches) {
+        navbar.classList.remove('scrolled');
+        return;
+      }
       navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }
+
+    syncNavbarScrollState();
+    window.addEventListener('scroll', () => {
+      syncNavbarScrollState();
     }, { passive: true });
+    mobileNavbarQuery.addEventListener('change', syncNavbarScrollState);
 
     // ─── MOBILE MENU ─────────────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
