@@ -425,71 +425,13 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      /* Section padding */
-      .hero-bg                    { padding: 72px 20px 56px !important; min-height: 100svh !important; }
-      #about, #benefits, #founders, #how-it-works, #vendors, #why-join, #contact
-                                  { padding: 72px 20px !important; }
-      section[style*="padding:100px"] { padding: 72px 20px !important; }
-      footer { padding: 48px 20px 32px !important; }
-
-      /* Hero glow — constrain to viewport */
-      .hero-glow { width: min(700px, 100vw) !important; height: min(700px, 100vw) !important; }
-
-      /* Grids — collapse to single column */
-      .why-join-grid              { grid-template-columns: 1fr !important; gap: 48px !important; }
-      .form-grid                  { grid-template-columns: 1fr !important; }
-      .footer-grid                { grid-template-columns: 1fr 1fr !important; gap: 40px 32px !important; }
-
-      /* Benefits & founders auto-fit grids */
-      #benefits  [style*="minmax(300px"] { grid-template-columns: 1fr !important; }
-      #founders  [style*="minmax(300px"] { grid-template-columns: 1fr !important; }
-      #how-it-works [style*="minmax(280px"] { grid-template-columns: 1fr !important; }
-
-      /* Reduce card padding on mobile */
-      .form-card                  { padding: 36px 24px !important; }
-      .founder-card[style*="padding:48px 40px"] { padding: 32px 24px !important; }
-      #founders [style*="padding:32px 40px"]    { padding: 24px 20px !important; flex-direction:column !important; }
-      #why-join [style*="padding:48px 40px"]    { padding: 28px 24px !important; }
-
-      /* Step connector — hide on mobile (overlaps in single-column layout) */
-      .step-connector             { display: none !important; }
-
-      /* Chat window — fit within viewport */
-      #chat-window                { width: min(360px, calc(100vw - 32px)) !important; height: min(500px, calc(100svh - 120px)) !important; }
-      #chat-widget                { bottom: 16px !important; right: 16px !important; }
-
-      /* Section headings margin */
-      #about [style*="margin-bottom:72px"],
-      #benefits [style*="margin-bottom:72px"],
-      #founders [style*="margin-bottom:72px"],
-      #how-it-works [style*="margin-bottom:72px"],
-      #vendors [style*="margin-bottom:56px"]     { margin-bottom: 40px !important; }
-
-      /* Three-pillars grid — stack on mobile */
-      #about [style*="minmax(200px"] { grid-template-columns: 1fr !important; }
-      #about [style*="border-left"]  { border-left: none !important; border-top: 1px solid rgba(31,61,43,0.08) !important; }
+      .why-join-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .form-grid     { grid-template-columns: 1fr !important; }
+      .footer-grid   { grid-template-columns: 1fr 1fr !important; gap: 40px 32px !important; }
+      .form-card     { padding: 36px 24px !important; }
     }
-
     @media (max-width: 480px) {
-      /* Further reduce padding */
-      #about, #benefits, #founders, #how-it-works, #vendors, #why-join, #contact
-                                  { padding: 56px 16px !important; }
-      .hero-bg                    { padding: 56px 16px 40px !important; }
-      section[style*="padding:100px"] { padding: 56px 16px !important; }
-
-      /* Footer */
-      .footer-grid                { grid-template-columns: 1fr !important; }
-
-      /* Chat widget positioning on small phones */
-      #chat-widget                { bottom: 12px !important; right: 12px !important; }
-      #chat-window                { width: calc(100vw - 24px) !important; }
-
-      /* Value cards — less padding on small phones */
-      #benefits .value-card[style*="padding:36px 32px"] { padding: 24px 20px !important; }
-      #how-it-works [style*="padding:44px 36px"]        { padding: 28px 20px !important; }
-
-      /* Hero h1 line breaks look better without forced breaks on small screens */
-      .hero-bg h1 br               { display: none; }
+      .footer-grid   { grid-template-columns: 1fr !important; }
     }
 
     /* ─── CHAT WIDGET ─── */
