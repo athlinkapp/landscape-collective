@@ -423,15 +423,22 @@
       flex-shrink: 0;
     }
 
+    /* ─── SECTION PADDING ─── */
+    .sec { padding: 120px 24px; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      .why-join-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .sec           { padding: 64px 20px !important; }
+      .why-join-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
       .form-grid     { grid-template-columns: 1fr !important; }
       .footer-grid   { grid-template-columns: 1fr 1fr !important; gap: 40px 32px !important; }
       .form-card     { padding: 36px 24px !important; }
+      #chat-window   { width: min(360px, calc(100vw - 32px)) !important; }
     }
     @media (max-width: 480px) {
+      .sec           { padding: 48px 16px !important; }
       .footer-grid   { grid-template-columns: 1fr !important; }
+      #chat-window   { width: calc(100vw - 24px) !important; }
     }
 
     /* ─── CHAT WIDGET ─── */
@@ -571,7 +578,7 @@
         </a>
 
         <!-- Desktop nav -->
-        <div style="display:flex; align-items:center; gap:32px;" class="hidden md:flex">
+        <div style="align-items:center; gap:32px;" class="hidden md:flex">
           <a href="#about"       class="nav-link">About</a>
           <a href="#benefits"    class="nav-link">Benefits</a>
           <a href="#vendors"     class="nav-link">Vendors</a>
@@ -725,7 +732,7 @@
   <!-- ═══════════════════════════════════════════
        ABOUT — What is Landscaper Collective
   ════════════════════════════════════════════════ -->
-  <section id="about" style="background:#F7F5F0; padding:120px 24px;">
+  <section id="about" class="sec" style="background:#F7F5F0;">
     <div style="max-width:900px; margin:0 auto; text-align:center;">
       <div class="fade-up" style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:48px;">
         <span class="section-label">About the Association</span>
@@ -768,7 +775,7 @@
   <!-- ═══════════════════════════════════════════
        VALUE PROPOSITIONS
   ════════════════════════════════════════════════ -->
-  <section id="benefits" style="background:#fff; padding:120px 24px;">
+  <section id="benefits" class="sec" style="background:#fff;">
     <div style="max-width:1140px; margin:0 auto;">
       <div class="fade-up" style="text-align:center; margin-bottom:72px;">
         <span class="section-label" style="display:block; margin-bottom:16px;">Member Benefits</span>
@@ -853,7 +860,7 @@
   <!-- ═══════════════════════════════════════════
        FOUNDERS
   ════════════════════════════════════════════════ -->
-  <section id="founders" style="background:#1F3D2B; padding:120px 24px;">
+  <section id="founders" class="sec" style="background:#1F3D2B;">
     <div style="max-width:1100px; margin:0 auto;">
       <div class="fade-up" style="text-align:center; margin-bottom:72px;">
         <span class="section-label" style="display:block; margin-bottom:16px; color:rgba(200,169,106,0.8);">Founded By Industry Veterans</span>
@@ -910,7 +917,7 @@
   <!-- ═══════════════════════════════════════════
        HOW IT WORKS
   ════════════════════════════════════════════════ -->
-  <section id="how-it-works" style="background:#F7F5F0; padding:120px 24px;">
+  <section id="how-it-works" class="sec" style="background:#F7F5F0;">
     <div style="max-width:1100px; margin:0 auto;">
       <div class="fade-up" style="text-align:center; margin-bottom:72px;">
         <span class="section-label" style="display:block; margin-bottom:16px;">The Process</span>
@@ -957,7 +964,7 @@
   <!-- ═══════════════════════════════════════════
        VENDOR NETWORK
   ════════════════════════════════════════════════ -->
-  <section id="vendors" style="background:#fff; padding:120px 24px;">
+  <section id="vendors" class="sec" style="background:#fff;">
     <div style="max-width:1100px; margin:0 auto;">
       <div class="fade-up" style="text-align:center; margin-bottom:56px;">
         <span class="section-label" style="display:block; margin-bottom:16px;">Preferred Vendor Network</span>
@@ -1166,7 +1173,7 @@
   <!-- ═══════════════════════════════════════════
        WHY JOIN
   ════════════════════════════════════════════════ -->
-  <section id="why-join" style="background:#1F3D2B; padding:120px 24px;">
+  <section id="why-join" class="sec" style="background:#1F3D2B;">
     <div class="why-join-grid" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
 
       <!-- Left: copy -->
@@ -1256,7 +1263,7 @@
   <!-- ═══════════════════════════════════════════
        CTA BANNER
   ════════════════════════════════════════════════ -->
-  <section style="background:#111111; padding:100px 24px;">
+  <section class="sec" style="background:#111111;">
     <div style="max-width:800px; margin:0 auto; text-align:center;">
       <div class="fade-up" style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:40px;">
         <span class="section-label" style="color:rgba(200,169,106,0.7);">Get Started</span>
@@ -1281,7 +1288,7 @@
   <!-- ═══════════════════════════════════════════
        APPLICATION FORM
   ════════════════════════════════════════════════ -->
-  <section id="contact" style="background:#F7F5F0; padding:120px 24px;">
+  <section id="contact" class="sec" style="background:#F7F5F0;">
     <div style="max-width:880px; margin:0 auto;">
       <div class="fade-up" style="text-align:center; margin-bottom:64px;">
         <span class="section-label" style="display:block; margin-bottom:16px;">Membership Application</span>
