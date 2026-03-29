@@ -431,8 +431,8 @@
       /* Disable scroll-in animations on mobile — prevents blank green flash on dark sections */
       .fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }
 
-      /* Hero: shrink padding so it doesn't create a blank void, hide scroll cue */
-      .hero-bg       { padding: 88px 20px 48px !important; min-height: 100svh !important; }
+      /* Hero: kill forced full-height + centering — those create a blank green void below content on mobile */
+      .hero-bg       { min-height: unset !important; align-items: flex-start !important; padding: 112px 20px 64px !important; }
       .hero-scroll-cue { display: none !important; }
 
       /* Sections */
