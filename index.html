@@ -428,6 +428,11 @@
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
+      /* Hero: shrink padding so it doesn't create a blank void, hide scroll cue */
+      .hero-bg       { padding: 88px 20px 48px !important; min-height: unset !important; }
+      .hero-scroll-cue { display: none !important; }
+
+      /* Sections */
       .sec           { padding: 64px 20px !important; }
       .why-join-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
       .form-grid     { grid-template-columns: 1fr !important; }
@@ -436,6 +441,7 @@
       #chat-window   { width: min(360px, calc(100vw - 32px)) !important; }
     }
     @media (max-width: 480px) {
+      .hero-bg       { padding: 80px 16px 40px !important; }
       .sec           { padding: 48px 16px !important; }
       .footer-grid   { grid-template-columns: 1fr !important; }
       #chat-window   { width: calc(100vw - 24px) !important; }
@@ -649,7 +655,7 @@
       </div>
 
       <!-- Scroll cue -->
-      <div class="fade-up delay-4" style="margin-top:80px; display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <div class="fade-up delay-4 hero-scroll-cue" style="margin-top:80px; display:flex; flex-direction:column; align-items:center; gap:8px;">
         <span style="font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(200,169,106,0.55);">Scroll</span>
         <div style="width:1px; height:40px; background:linear-gradient(to bottom, rgba(200,169,106,0.5), transparent);"></div>
       </div>
