@@ -426,25 +426,54 @@
     /* ─── SECTION PADDING ─── */
     .sec { padding: 120px 24px; }
 
-    /* ─── HERO LAYOUT (kept in CSS so media queries work — inline styles can't be overridden by @media) ─── */
+    /* ─── HERO ─── */
     .hero-section {
-      display: flex;
-      align-items: center;
+      display: flex; align-items: center;
       min-height: 100vh;
       padding: 120px 24px 80px;
+    }
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 880px; margin: 0 auto; text-align: center;
+    }
+    .hero-eyebrow {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin-bottom: 32px;
+    }
+    .hero-line { width: 32px; height: 1px; background: rgba(200,169,106,0.5); }
+    .hero-h1 {
+      font-size: clamp(42px,7vw,88px); font-weight: 700; line-height: 1.05;
+      letter-spacing: -0.03em; color: #F7F5F0; margin-bottom: 28px;
+    }
+    .hero-sub {
+      font-size: clamp(16px,2vw,19px); line-height: 1.7;
+      color: rgba(247,245,240,0.72); max-width: 620px;
+      margin: 0 auto 44px; font-weight: 300;
+    }
+    .hero-buttons {
+      display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+    }
+    .hero-btn-primary  { padding: 14px 32px; font-size: 15px; }
+    .hero-btn-secondary { padding: 13px 32px; font-size: 15px; }
+    .hero-scroll-cue {
+      margin-top: 80px; display: flex; flex-direction: column;
+      align-items: center; gap: 8px;
     }
 
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
-      /* Disable scroll-in animations on mobile — prevents blank green flash on dark sections */
+      /* Kill scroll animations — blank flash on dark sections */
       .fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }
 
-      /* Hero: no forced full-height, no centering — prevents blank green void below content */
-      .hero-section  { min-height: 0; align-items: flex-start; padding: 108px 20px 56px; }
-      .hero-scroll-cue { display: none !important; }
+      /* Hero — block layout, no flex centering, no min-height forcing a full-screen void */
+      .hero-section   { display: block; min-height: 0; padding: 96px 20px 48px; }
+      .hero-h1        { font-size: 36px; }
+      .hero-sub       { font-size: 16px; margin-bottom: 32px; }
+      .hero-scroll-cue { display: none; }
+      .hero-btn-primary, .hero-btn-secondary { padding: 13px 24px; font-size: 14px; }
 
       /* Sections */
-      .sec           { padding: 64px 20px !important; }
+      .sec           { padding: 64px 20px; }
       .why-join-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
       .form-grid     { grid-template-columns: 1fr !important; }
       .footer-grid   { grid-template-columns: 1fr 1fr !important; gap: 40px 32px !important; }
@@ -453,7 +482,8 @@
     }
     @media (max-width: 480px) {
       .hero-section  { padding: 88px 16px 40px; }
-      .sec           { padding: 48px 16px !important; }
+      .hero-h1       { font-size: 32px; }
+      .sec           { padding: 48px 16px; }
       .footer-grid   { grid-template-columns: 1fr !important; }
       #chat-window   { width: calc(100vw - 24px) !important; }
     }
@@ -640,33 +670,32 @@
   <section class="hero-bg hero-section">
     <div class="hero-glow"></div>
     <div class="hero-overlay"></div>
-    <div style="position:relative; z-index:10; max-width:880px; margin:0 auto; text-align:center;">
-      <div class="fade-up" style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:32px;">
-        <div style="width:32px; height:1px; background:rgba(200,169,106,0.5);"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <div class="hero-line"></div>
         <span class="section-label" style="color:rgba(200,169,106,0.9);">National Buying Association</span>
-        <div style="width:32px; height:1px; background:rgba(200,169,106,0.5);"></div>
+        <div class="hero-line"></div>
       </div>
 
-      <h1 class="fade-up delay-1" style="font-size:clamp(42px,7vw,88px); font-weight:700; line-height:1.05; letter-spacing:-0.03em; color:#F7F5F0; margin-bottom:28px;">
+      <h1 class="hero-h1">
         Join the Collective.<br>
         Buy Smarter.<br>
         <em style="font-style:italic; color:#C8A96A;">Grow Stronger.</em>
       </h1>
 
-      <p class="fade-up delay-2" style="font-size:clamp(16px,2vw,19px); line-height:1.7; color:rgba(247,245,240,0.72); max-width:620px; margin:0 auto 44px; font-weight:300;">
+      <p class="hero-sub">
         Landscaper Collective gives independent landscape companies access to national pricing from major vendors and suppliers — powered by the collective buying strength of members across the country.
       </p>
 
-      <div class="fade-up delay-3" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-        <a href="#contact" class="btn-gold" style="padding:14px 32px; font-size:15px;">
+      <div class="hero-buttons">
+        <a href="#contact" class="btn-gold hero-btn-primary">
           Apply Now
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
-        <a href="#about" class="btn-outline-gold" style="padding:13px 32px; font-size:15px;">Request Information</a>
+        <a href="#about" class="btn-outline-gold hero-btn-secondary">Learn More</a>
       </div>
 
-      <!-- Scroll cue -->
-      <div class="fade-up delay-4 hero-scroll-cue" style="margin-top:80px; display:flex; flex-direction:column; align-items:center; gap:8px;">
+      <div class="hero-scroll-cue">
         <span style="font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(200,169,106,0.55);">Scroll</span>
         <div style="width:1px; height:40px; background:linear-gradient(to bottom, rgba(200,169,106,0.5), transparent);"></div>
       </div>
