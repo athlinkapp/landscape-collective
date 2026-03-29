@@ -296,6 +296,9 @@
     label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #1F3D2B; letter-spacing: 0.01em; }
 
     /* ─── SCROLL ANIMATIONS ─── */
+    /* Hero is above the fold — always show immediately, no observer needed */
+    .hero-bg .fade-up { opacity: 1 !important; transform: translateY(0) !important; }
+
     .fade-up {
       opacity: 0; transform: translateY(28px);
       transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
@@ -429,7 +432,7 @@
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       /* Hero: shrink padding so it doesn't create a blank void, hide scroll cue */
-      .hero-bg       { padding: 88px 20px 48px !important; min-height: unset !important; }
+      .hero-bg       { padding: 88px 20px 48px !important; min-height: 100svh !important; }
       .hero-scroll-cue { display: none !important; }
 
       /* Sections */
@@ -1572,7 +1575,7 @@
           observer.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: 0.08, rootMargin: '0px 0px 0px 0px' });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
