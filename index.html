@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Landscaper Collective is a national buying association that gives independent landscape companies access to national pricing from major vendors — powered by the collective buying power of members across the country." />
+  <meta property="og:title" content="Landscaper Collective — National Buying Power for Landscape Companies" />
+  <meta property="og:description" content="Join the Collective. Access national pricing from major vendors and suppliers through collective buying power." />
+  <meta property="og:type" content="website" />
+  <title>Landscaper Collective — National Buying Power for Landscape Companies</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'green-deep': '#1F3D2B',
+            'green-mid': '#2A5238',
+            'green-light': '#3D6B4F',
+            'gold': '#C8A96A',
+            'gold-light': '#D4BA85',
+            'gold-dark': '#A88A4A',
+            'cream': '#F7F5F0',
+            'ink': '#111111',
+            'charcoal': '#2E2E2E',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: #111111; background: #F7F5F0; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* Skip link */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px; z-index: 9999;
+      background: #C8A96A; color: #1F3D2B; padding: 8px 16px;
+      border-radius: 4px; font-weight: 600; font-size: 14px;
+      transition: top 0.2s;
+    }
+    .skip-link:focus { top: 16px; }
+
+    /* ─── HERO BACKGROUND ─── */
+    .hero-bg {
+      background-color: #172e1f;
+      background-image:
+        radial-gradient(ellipse 90% 60% at 50% 0%,   rgba(50, 100, 65, 0.45) 0%, transparent 65%),
+        radial-gradient(ellipse 70% 50% at 0%   60%,  rgba(35,  75, 48, 0.50) 0%, transparent 55%),
+        radial-gradient(ellipse 55% 55% at 100% 25%,  rgba( 8,  22, 14, 0.70) 0%, transparent 50%),
+        radial-gradient(ellipse 100% 45% at 50% 100%, rgba( 4,  12,  8, 0.80) 0%, transparent 60%);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Turf stripes — diagonal, very faint */
+    .hero-bg::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(
+        158deg,
+        rgba(255,255,255,0.016) 0px, rgba(255,255,255,0.016) 1px,
+        transparent 1px, transparent 68px,
+        rgba(0,0,0,0.03) 68px, rgba(0,0,0,0.03) 69px,
+        transparent 69px, transparent 136px
+      );
+      pointer-events: none;
+    }
+    /* Grain */
+    .hero-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 300px 300px;
+      pointer-events: none;
+      mix-blend-mode: overlay;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0.35) 100%);
+      pointer-events: none;
+    }
+    /* Soft gold glow in center — very subtle */
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(200,169,106,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      top: 40%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      animation: glow-pulse 8s ease-in-out infinite;
+    }
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.08); }
+    }
+
+    /* ─── NAVBAR ─── */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(23, 46, 31, 0.0);
+      transition: background 0.4s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow  0.4s cubic-bezier(0.4,0,0.2,1),
+                  backdrop-filter 0.4s;
+    }
+    #navbar.scrolled {
+      background: rgba(23, 46, 31, 0.96);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 rgba(200,169,106,0.12), 0 4px 32px rgba(0,0,0,0.25);
+    }
+    .nav-link {
+      position: relative;
+      color: rgba(255,255,255,0.78);
+      font-size: 13.5px; font-weight: 500; font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+      padding: 4px 0;
+      transition: color 0.2s cubic-bezier(0.4,0,0.2,1);
+      white-space: nowrap;
+    }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -1px; left: 0;
+      width: 0; height: 1px; background: #C8A96A;
+      transition: width 0.25s cubic-bezier(0.4,0,0.2,1);
+    }
+    .nav-link:hover { color: #fff; }
+    .nav-link:hover::after { width: 100%; }
+
+    /* ─── BUTTONS ─── */
+    .btn-gold {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #C8A96A; color: #1F3D2B;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      letter-spacing: 0.01em;
+      padding: 11px 24px; border-radius: 4px;
+      border: none; cursor: pointer;
+      transition: background      0.2s cubic-bezier(0.4,0,0.2,1),
+                  transform       0.15s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow      0.2s cubic-bezier(0.4,0,0.2,1);
+      text-decoration: none;
+    }
+    .btn-gold:hover  { background: #d4ba85; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(200,169,106,0.38); }
+    .btn-gold:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(200,169,106,0.2); }
+
+    .btn-outline-gold {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1.5px solid rgba(200,169,106,0.55); color: #C8A96A;
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+      padding: 10px 24px; border-radius: 4px;
+      cursor: pointer; background: transparent;
+      transition: border-color 0.2s cubic-bezier(0.4,0,0.2,1),
+                  background   0.2s cubic-bezier(0.4,0,0.2,1),
+                  transform    0.15s cubic-bezier(0.4,0,0.2,1);
+      text-decoration: none;
+    }
+    .btn-outline-gold:hover { border-color: #C8A96A; background: rgba(200,169,106,0.09); transform: translateY(-1px); }
+    .btn-outline-gold:active { transform: translateY(0); }
+
+    .btn-green {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #1F3D2B; color: #F7F5F0;
+      font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+      padding: 12px 28px; border-radius: 4px;
+      border: none; cursor: pointer;
+      transition: background 0.2s cubic-bezier(0.4,0,0.2,1),
+                  transform  0.15s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow 0.2s cubic-bezier(0.4,0,0.2,1);
+      text-decoration: none;
+    }
+    .btn-green:hover  { background: #2A5238; transform: translateY(-1px); box-shadow: 0 8px 28px rgba(31,61,43,0.3); }
+    .btn-green:active { transform: translateY(0); }
+
+    .btn-outline-dark {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1.5px solid rgba(31,61,43,0.35); color: #1F3D2B;
+      font-family: 'Inter', sans-serif; font-weight: 500; font-size: 14px;
+      padding: 11px 28px; border-radius: 4px;
+      cursor: pointer; background: transparent;
+      transition: background 0.2s cubic-bezier(0.4,0,0.2,1),
+                  color      0.2s cubic-bezier(0.4,0,0.2,1),
+                  transform  0.15s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.2s;
+      text-decoration: none;
+    }
+    .btn-outline-dark:hover { background: #1F3D2B; color: #F7F5F0; border-color: #1F3D2B; transform: translateY(-1px); }
+    .btn-outline-dark:active { transform: translateY(0); }
+
+    /* ─── SECTION LABELS ─── */
+    .section-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: #C8A96A;
+    }
+    .gold-bar {
+      width: 44px; height: 2px;
+      background: linear-gradient(90deg, #C8A96A, #d4ba85);
+      border-radius: 1px;
+    }
+
+    /* ─── CARDS ─── */
+    .value-card {
+      background: #fff;
+      border: 1px solid rgba(31,61,43,0.07);
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 6px 20px rgba(0,0,0,0.04);
+      transition: transform      0.28s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow     0.28s cubic-bezier(0.4,0,0.2,1),
+                  border-color   0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    .value-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(31,61,43,0.11), 0 2px 8px rgba(31,61,43,0.06);
+      border-color: rgba(200,169,106,0.28);
+    }
+
+    .founder-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(200,169,106,0.18);
+      border-radius: 8px;
+      transition: border-color 0.28s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow   0.28s cubic-bezier(0.4,0,0.2,1),
+                  transform    0.28s cubic-bezier(0.4,0,0.2,1);
+    }
+    .founder-card:hover {
+      border-color: rgba(200,169,106,0.38);
+      box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+      transform: translateY(-3px);
+    }
+
+    .vendor-item {
+      background: #fff;
+      border: 1px solid rgba(31,61,43,0.07);
+      border-radius: 6px;
+      transition: transform    0.2s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow   0.2s cubic-bezier(0.4,0,0.2,1),
+                  border-color 0.2s;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .vendor-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(31,61,43,0.1);
+      border-color: rgba(200,169,106,0.25);
+    }
+    .vendor-item.featured {
+      border-color: rgba(200,169,106,0.4);
+      box-shadow: 0 2px 12px rgba(200,169,106,0.12), 0 1px 4px rgba(0,0,0,0.04);
+    }
+
+    /* ─── VENDOR TABS ─── */
+    .vendor-tab-bar { -ms-overflow-style: none; scrollbar-width: none; }
+    .vendor-tab-bar::-webkit-scrollbar { display: none; }
+    .vendor-tab {
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+      padding: 8px 18px; border-radius: 100px; cursor: pointer;
+      border: 1px solid transparent;
+      transition: background 0.2s cubic-bezier(0.4,0,0.2,1),
+                  color     0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .vendor-tab.active { background: #1F3D2B; color: #fff; }
+    .vendor-tab:not(.active) {
+      background: rgba(31,61,43,0.06);
+      color: #1F3D2B;
+      border-color: rgba(31,61,43,0.1);
+    }
+    .vendor-tab:not(.active):hover { background: rgba(31,61,43,0.11); }
+
+    /* ─── FORM ─── */
+    .form-input {
+      width: 100%;
+      border: 1.5px solid rgba(31,61,43,0.14);
+      border-radius: 5px;
+      background: #fff;
+      padding: 11px 14px;
+      font-family: 'Inter', sans-serif; font-size: 14px; color: #111;
+      outline: none;
+      transition: border-color 0.2s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow   0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .form-input:focus { border-color: #1F3D2B; box-shadow: 0 0 0 3px rgba(31,61,43,0.08); }
+    .form-input::placeholder { color: rgba(17,17,17,0.38); }
+    label { font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600; color: #1F3D2B; letter-spacing: 0.01em; }
+
+    /* ─── SCROLL ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .fade-up.in { opacity: 1; transform: translateY(0); }
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ─── STEP CONNECTOR ─── */
+    .step-connector {
+      position: absolute; top: 28px; left: calc(50% + 48px);
+      width: calc(100% - 96px); height: 1px;
+      background: linear-gradient(90deg, rgba(200,169,106,0.4), rgba(200,169,106,0.1));
+    }
+
+    /* ─── ICON BG ─── */
+    .icon-wrap {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, rgba(200,169,106,0.14), rgba(200,169,106,0.06));
+      border: 1px solid rgba(200,169,106,0.2);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ─── MOBILE MENU ─── */
+    #mobile-menu {
+      transition: transform 0.3s cubic-bezier(0.4,0,0.2,1),
+                  opacity  0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    #mobile-menu.hidden-menu { transform: translateY(-8px); opacity: 0; pointer-events: none; }
+    #mobile-menu.open-menu   { transform: translateY(0);    opacity: 1; pointer-events: auto; }
+
+    /* ─── LOGO CARDS ─── */
+    .logo-card {
+      height: 76px;
+      padding: 12px 24px;
+      background: #fff;
+      border: 1px solid rgba(31,61,43,0.09);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+      transition: border-color 0.2s cubic-bezier(0.4,0,0.2,1),
+                  box-shadow   0.2s cubic-bezier(0.4,0,0.2,1),
+                  transform    0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .logo-card:hover {
+      border-color: rgba(200,169,106,0.4);
+      box-shadow: 0 6px 22px rgba(31,61,43,0.1);
+      transform: translateY(-2px);
+    }
+    .logo-card img {
+      height: 38px;
+      width: auto;
+      max-width: 160px;
+      object-fit: contain;
+      display: block;
+    }
+    .logo-card-ph {
+      background: #1F3D2B;
+      border-color: rgba(200,169,106,0.15);
+      min-width: 130px;
+    }
+    .logo-card-ph:hover { border-color: rgba(200,169,106,0.38); }
+    .logo-card-ph span {
+      font-family: 'Inter', sans-serif;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #C8A96A;
+      white-space: nowrap;
+      letter-spacing: 0.01em;
+    }
+
+    /* ─── MARQUEE ─── */
+    @keyframes marquee-fwd {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    @keyframes marquee-rev {
+      from { transform: translateX(-50%); }
+      to   { transform: translateX(0); }
+    }
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee-fwd 38s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-track-rev {
+      display: flex;
+      width: max-content;
+      animation: marquee-rev 42s linear infinite;
+    }
+    .marquee-track-rev:hover { animation-play-state: paused; }
+    .marquee-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 20px;
+      border-radius: 100px;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      user-select: none;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    }
+    .marquee-pill:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(31,61,43,0.12);
+      border-color: rgba(200,169,106,0.45) !important;
+    }
+    .marquee-pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 768px) {
+      .why-join-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .form-grid     { grid-template-columns: 1fr !important; }
+      .footer-grid   { grid-template-columns: 1fr 1fr !important; gap: 40px 32px !important; }
+      .form-card     { padding: 36px 24px !important; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid   { grid-template-columns: 1fr !important; }
+    }
+
+    /* ─── CHAT WIDGET ─── */
+    #chat-widget { position: fixed; bottom: 24px; right: 24px; z-index: 999; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
+
+    #chat-toggle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: #1F3D2B; border: 2px solid #C8A96A; color: #C8A96A;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 0 0 0 rgba(200,169,106,0.4);
+      transition: background 0.2s, transform 0.15s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+    #chat-toggle:hover { background: #2A5238; transform: scale(1.07); box-shadow: 0 12px 36px rgba(0,0,0,0.3), 0 0 0 6px rgba(200,169,106,0.12); }
+    #chat-toggle:active { transform: scale(0.95); }
+    #chat-toggle.open { background: #C8A96A; color: #1F3D2B; }
+
+    #chat-window {
+      width: 360px; height: 500px;
+      background: #1a3325;
+      border: 1px solid rgba(200,169,106,0.22);
+      border-radius: 16px; overflow: hidden;
+      display: flex; flex-direction: column;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 4px 16px rgba(0,0,0,0.2);
+      transform-origin: bottom right;
+      transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1),
+                  transform 0.22s cubic-bezier(0.4,0,0.2,1);
+    }
+    #chat-window.chat-hidden { opacity: 0; transform: scale(0.93) translateY(12px); pointer-events: none; }
+    #chat-window.chat-visible { opacity: 1; transform: scale(1) translateY(0); pointer-events: auto; }
+
+    #chat-messages {
+      flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px;
+      scrollbar-width: thin; scrollbar-color: rgba(200,169,106,0.2) transparent;
+    }
+    #chat-messages::-webkit-scrollbar { width: 4px; }
+    #chat-messages::-webkit-scrollbar-thumb { background: rgba(200,169,106,0.2); border-radius: 2px; }
+
+    .chat-bubble {
+      max-width: 80%; padding: 10px 14px; border-radius: 14px;
+      font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.6;
+      animation: bubble-in 0.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    @keyframes bubble-in { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+
+    .chat-bubble-ai {
+      background: rgba(200,169,106,0.1); border: 1px solid rgba(200,169,106,0.2);
+      color: rgba(247,245,240,0.88); border-radius: 14px 14px 14px 2px; align-self: flex-start;
+    }
+    .chat-bubble-user {
+      background: #C8A96A; color: #1F3D2B; font-weight: 500;
+      border-radius: 14px 14px 2px 14px; align-self: flex-end;
+    }
+
+    .chat-typing {
+      display: flex; align-items: center; gap: 5px;
+      padding: 10px 14px; border-radius: 14px 14px 14px 2px;
+      background: rgba(200,169,106,0.1); border: 1px solid rgba(200,169,106,0.2);
+      align-self: flex-start; animation: bubble-in 0.2s ease;
+    }
+    .chat-typing span {
+      width: 7px; height: 7px; background: #C8A96A; border-radius: 50%; display: block;
+    }
+    .chat-typing span:nth-child(1) { animation: dot-bounce 1.2s infinite 0s; }
+    .chat-typing span:nth-child(2) { animation: dot-bounce 1.2s infinite 0.2s; }
+    .chat-typing span:nth-child(3) { animation: dot-bounce 1.2s infinite 0.4s; }
+    @keyframes dot-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+      30% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    #chat-input {
+      background: rgba(200,169,106,0.08); border: 1px solid rgba(200,169,106,0.25);
+      border-radius: 100px; color: rgba(247,245,240,0.9); padding: 10px 16px;
+      font-family: 'Inter', sans-serif; font-size: 13.5px; outline: none; flex: 1;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    #chat-input::placeholder { color: rgba(200,169,106,0.4); }
+    #chat-input:focus { border-color: rgba(200,169,106,0.55); box-shadow: 0 0 0 3px rgba(200,169,106,0.08); }
+
+    #chat-send {
+      width: 38px; height: 38px; border-radius: 50%; background: #C8A96A; color: #1F3D2B;
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: background 0.2s, transform 0.15s; opacity: 1;
+    }
+    #chat-send:hover { background: #d4ba85; transform: scale(1.08); }
+    #chat-send:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+    /* ─── FOCUS STYLES ─── */
+    a:focus-visible, button:focus-visible, input:focus-visible,
+    textarea:focus-visible, select:focus-visible {
+      outline: 2px solid #C8A96A; outline-offset: 3px;
+    }
+
+    /* ─── MISC ─── */
+    .gold-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 700; color: #C8A96A;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .section-heading {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -0.025em; color: #111;
+    }
+    .section-heading-light { color: #F7F5F0; }
+
+    /* Success state */
+    #form-success { display: none; }
+    #form-success.visible { display: flex; }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+  ════════════════════════════════════════════════ -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div style="max-width:1200px; margin:0 auto; padding:0 24px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; height:72px;">
+
+        <!-- Logo -->
+        <a href="#" style="text-decoration:none; display:flex; align-items:center; gap:10px; flex-shrink:0;">
+          <!-- Leaf mark -->
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 2C14 2 4 8 4 16C4 21.52 8.48 26 14 26C19.52 26 24 21.52 24 16C24 8 14 2 14 2Z" fill="#C8A96A" opacity="0.9"/>
+            <path d="M14 26V14" stroke="#1F3D2B" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 18L10 14" stroke="#1F3D2B" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:#fff; letter-spacing:-0.01em;">
+            Landscaper <span style="color:#C8A96A;">Collective</span>
+          </span>
+        </a>
+
+        <!-- Desktop nav -->
+        <div style="display:flex; align-items:center; gap:32px;" class="hidden md:flex">
+          <a href="#about"       class="nav-link">About</a>
+          <a href="#benefits"    class="nav-link">Benefits</a>
+          <a href="#vendors"     class="nav-link">Vendors</a>
+          <a href="#founders"    class="nav-link">Founders</a>
+          <a href="#how-it-works" class="nav-link">How It Works</a>
+          <a href="#contact"     class="nav-link">Contact</a>
+        </div>
+
+        <!-- CTA + hamburger -->
+        <div style="display:flex; align-items:center; gap:16px;">
+          <a href="#contact" class="btn-gold hidden md:inline-flex" style="padding:9px 20px; font-size:13px;">Apply Now</a>
+          <button id="hamburger" aria-label="Toggle menu" aria-expanded="false"
+            style="display:flex; flex-direction:column; gap:5px; padding:8px; cursor:pointer; background:none; border:none;" class="md:hidden">
+            <span class="ham-bar" style="display:block; width:22px; height:1.5px; background:rgba(255,255,255,0.85); border-radius:1px; transition:transform 0.25s, opacity 0.25s;"></span>
+            <span class="ham-bar" style="display:block; width:22px; height:1.5px; background:rgba(255,255,255,0.85); border-radius:1px; transition:transform 0.25s, opacity 0.25s;"></span>
+            <span class="ham-bar" style="display:block; width:22px; height:1.5px; background:rgba(255,255,255,0.85); border-radius:1px; transition:transform 0.25s, opacity 0.25s;"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden-menu md:hidden"
+      style="background:rgba(23,46,31,0.98); backdrop-filter:blur(16px); border-top:1px solid rgba(200,169,106,0.12); padding:20px 24px 24px;">
+      <div style="display:flex; flex-direction:column; gap:4px;">
+        <a href="#about"        class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">About</a>
+        <a href="#benefits"     class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">Benefits</a>
+        <a href="#vendors"      class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">Vendors</a>
+        <a href="#founders"     class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">Founders</a>
+        <a href="#how-it-works" class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">How It Works</a>
+        <a href="#contact"      class="nav-link" style="padding:10px 0; font-size:15px; border-bottom:1px solid rgba(255,255,255,0.06);">Contact</a>
+        <a href="#contact" class="btn-gold" style="margin-top:16px; justify-content:center;">Apply Now</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ════════════════════════════════════════════════ -->
+  <section class="hero-bg" style="min-height:100vh; display:flex; align-items:center; padding:120px 24px 80px;">
+    <div class="hero-glow"></div>
+    <div class="hero-overlay"></div>
+    <div style="position:relative; z-index:10; max-width:880px; margin:0 auto; text-align:center;">
+      <div class="fade-up" style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:32px;">
+        <div style="width:32px; height:1px; background:rgba(200,169,106,0.5);"></div>
+        <span class="section-label" style="color:rgba(200,169,106,0.9);">National Buying Association</span>
+        <div style="width:32px; height:1px; background:rgba(200,169,106,0.5);"></div>
+      </div>
+
+      <h1 class="fade-up delay-1" style="font-size:clamp(42px,7vw,88px); font-weight:700; line-height:1.05; letter-spacing:-0.03em; color:#F7F5F0; margin-bottom:28px;">
+        Join the Collective.<br>
+        Buy Smarter.<br>
+        <em style="font-style:italic; color:#C8A96A;">Grow Stronger.</em>
+      </h1>
+
+      <p class="fade-up delay-2" style="font-size:clamp(16px,2vw,19px); line-height:1.7; color:rgba(247,245,240,0.72); max-width:620px; margin:0 auto 44px; font-weight:300;">
+        Landscaper Collective gives independent landscape companies access to national pricing from major vendors and suppliers — powered by the collective buying strength of members across the country.
+      </p>
+
+      <div class="fade-up delay-3" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="#contact" class="btn-gold" style="padding:14px 32px; font-size:15px;">
+          Apply Now
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#about" class="btn-outline-gold" style="padding:13px 32px; font-size:15px;">Request Information</a>
+      </div>
+
+      <!-- Scroll cue -->
+      <div class="fade-up delay-4" style="margin-top:80px; display:flex; flex-direction:column; align-items:center; gap:8px;">
+        <span style="font-size:11px; font-weight:500; letter-spacing:0.12em; text-transform:uppercase; color:rgba(200,169,106,0.55);">Scroll</span>
+        <div style="width:1px; height:40px; background:linear-gradient(to bottom, rgba(200,169,106,0.5), transparent);"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       VENDOR MARQUEE STRIP
+  ════════════════════════════════════════════════ -->
+  <section aria-label="Preferred vendor partners" style="background:#F7F5F0; border-top:1px solid rgba(31,61,43,0.07); border-bottom:1px solid rgba(31,61,43,0.07); padding:44px 0 40px;">
+    <div style="text-align:center; margin-bottom:28px; padding:0 24px;">
+      <span class="section-label">Preferred Vendor &amp; Supplier Partners</span>
+    </div>
+
+    <!-- Row 1: forward — Hustler, John Deere, Wright, SiteOne, Ewing, Walker, Stihl, Irritrol, Exmark, Aspire -->
+    <div style="overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, black 120px, black calc(100% - 120px), transparent); mask-image:linear-gradient(to right, transparent, black 120px, black calc(100% - 120px), transparent); margin-bottom:14px;">
+      <div class="marquee-track" style="gap:14px; padding:6px 0;">
+        <!-- SET 1 -->
+        <div class="logo-card" style="position:relative; padding-bottom:20px;">
+          <img src="PartnerLogos/Commercial%20Lawn%20Mowers.PNG" alt="Hustler Mowers" />
+          <span style="position:absolute; bottom:6px; left:50%; transform:translateX(-50%); font-size:9px; font-weight:700; color:#1F3D2B; background:#C8A96A; padding:2px 9px; border-radius:100px; letter-spacing:0.08em; white-space:nowrap;">UP TO 27% OFF</span>
+        </div>
+        <div class="logo-card"><img src="PartnerLogos/Compact%20Equipment%20%20John%20Deere.PNG" alt="John Deere Equipment" /></div>
+        <div class="logo-card logo-card-ph"><span>Wright Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/httpswww.siteone.comen.PNG" alt="SiteOne Landscape Supply" /></div>
+        <div class="logo-card"><img src="PartnerLogos/Home%20-%20Ewing.PNG" alt="Ewing Irrigation" /></div>
+        <div class="logo-card logo-card-ph"><span>Walker Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/STIHL%20-%20The%20Number%20One%20Selling%20Brand%20of%20Chainsaws%20%20STIHL%20USA%20%20STIHL.PNG" alt="Stihl" /></div>
+        <div class="logo-card"><img src="PartnerLogos/Irritrol%20%20Home.PNG" alt="Irritrol" /></div>
+        <div class="logo-card logo-card-ph"><span>Exmark Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/Aspire%20-%20Field%20Service%20Management%20Software.PNG" alt="Aspire Software" /></div>
+        <!-- SET 2 (duplicate for seamless loop) -->
+        <div class="logo-card" style="position:relative; padding-bottom:20px;">
+          <img src="PartnerLogos/Commercial%20Lawn%20Mowers.PNG" alt="Hustler Mowers" />
+          <span style="position:absolute; bottom:6px; left:50%; transform:translateX(-50%); font-size:9px; font-weight:700; color:#1F3D2B; background:#C8A96A; padding:2px 9px; border-radius:100px; letter-spacing:0.08em; white-space:nowrap;">UP TO 27% OFF</span>
+        </div>
+        <div class="logo-card"><img src="PartnerLogos/Compact%20Equipment%20%20John%20Deere.PNG" alt="John Deere Equipment" /></div>
+        <div class="logo-card logo-card-ph"><span>Wright Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/httpswww.siteone.comen.PNG" alt="SiteOne Landscape Supply" /></div>
+        <div class="logo-card"><img src="PartnerLogos/Home%20-%20Ewing.PNG" alt="Ewing Irrigation" /></div>
+        <div class="logo-card logo-card-ph"><span>Walker Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/STIHL%20-%20The%20Number%20One%20Selling%20Brand%20of%20Chainsaws%20%20STIHL%20USA%20%20STIHL.PNG" alt="Stihl" /></div>
+        <div class="logo-card"><img src="PartnerLogos/Irritrol%20%20Home.PNG" alt="Irritrol" /></div>
+        <div class="logo-card logo-card-ph"><span>Exmark Mowers</span></div>
+        <div class="logo-card"><img src="PartnerLogos/Aspire%20-%20Field%20Service%20Management%20Software.PNG" alt="Aspire Software" /></div>
+      </div>
+    </div>
+
+    <!-- Row 2: reverse — Rain Bird, Bobcat, Horizon, Thrive, Husqvarna, Caterpillar, Honda, Home Depot, Fimco, Fertilizers, LVL -->
+    <div style="overflow:hidden; -webkit-mask-image:linear-gradient(to right, transparent, black 120px, black calc(100% - 120px), transparent); mask-image:linear-gradient(to right, transparent, black 120px, black calc(100% - 120px), transparent);">
+      <div class="marquee-track-rev" style="gap:14px; padding:6px 0;">
+        <!-- SET 1 -->
+        <div class="logo-card"><img src="PartnerLogos/Setup%20your%20own%20sprinkler%20system%20with%20Rain%20Bird%E2%80%99s%20smart%20watering%20technology.PNG" alt="Rain Bird" /></div>
+        <div class="logo-card logo-card-ph"><span>Bobcat</span></div>
+        <div class="logo-card logo-card-ph"><span>Horizon Irrigation</span></div>
+        <div class="logo-card logo-card-ph"><span>Thrive Controllers</span></div>
+        <div class="logo-card logo-card-ph"><span>Husqvarna Robotics</span></div>
+        <div class="logo-card logo-card-ph"><span>Caterpillar</span></div>
+        <div class="logo-card logo-card-ph"><span>Honda</span></div>
+        <div class="logo-card logo-card-ph"><span>Home Depot</span></div>
+        <div class="logo-card logo-card-ph"><span>Fimco</span></div>
+        <div class="logo-card logo-card-ph"><span>Fertilizers &amp; Nutrients</span></div>
+        <div class="logo-card logo-card-ph"><span>Low Voltage Lighting</span></div>
+        <!-- SET 2 (duplicate) -->
+        <div class="logo-card"><img src="PartnerLogos/Setup%20your%20own%20sprinkler%20system%20with%20Rain%20Bird%E2%80%99s%20smart%20watering%20technology.PNG" alt="Rain Bird" /></div>
+        <div class="logo-card logo-card-ph"><span>Bobcat</span></div>
+        <div class="logo-card logo-card-ph"><span>Horizon Irrigation</span></div>
+        <div class="logo-card logo-card-ph"><span>Thrive Controllers</span></div>
+        <div class="logo-card logo-card-ph"><span>Husqvarna Robotics</span></div>
+        <div class="logo-card logo-card-ph"><span>Caterpillar</span></div>
+        <div class="logo-card logo-card-ph"><span>Honda</span></div>
+        <div class="logo-card logo-card-ph"><span>Home Depot</span></div>
+        <div class="logo-card logo-card-ph"><span>Fimco</span></div>
+        <div class="logo-card logo-card-ph"><span>Fertilizers &amp; Nutrients</span></div>
+        <div class="logo-card logo-card-ph"><span>Low Voltage Lighting</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT — What is Landscaper Collective
+  ════════════════════════════════════════════════ -->
+  <section id="about" style="background:#F7F5F0; padding:120px 24px;">
+    <div style="max-width:900px; margin:0 auto; text-align:center;">
+      <div class="fade-up" style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:48px;">
+        <span class="section-label">About the Association</span>
+        <div class="gold-bar"></div>
+      </div>
+
+      <h2 class="section-heading fade-up delay-1" style="margin-bottom:32px;">
+        The buying power of a national company.<br>
+        <em style="font-style:italic; color:#2A5238;">Without losing your independence.</em>
+      </h2>
+
+      <p class="fade-up delay-2" style="font-size:17px; line-height:1.8; color:#2E2E2E; margin-bottom:24px; font-weight:400;">
+        As an independent landscaper, you're purchasing equipment, materials, and supplies at retail pricing — the same pricing available to any single buyer walking through the door. Landscaper Collective changes that equation.
+      </p>
+      <p class="fade-up delay-3" style="font-size:17px; line-height:1.8; color:#2E2E2E; margin-bottom:24px;">
+        We are a national buying association built exclusively for landscape companies. By pooling the combined purchasing volume of members across the country, we negotiate directly with major vendors and suppliers to secure national pricing — the kind of pricing previously available only to the largest landscape companies in the industry.
+      </p>
+      <p class="fade-up delay-4" style="font-size:17px; line-height:1.8; color:#2E2E2E;">
+        You remain fully independent. Your business stays yours. But your purchasing power grows to match companies many times your size.
+      </p>
+
+      <!-- Three pillars -->
+      <div class="fade-up delay-5" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:2px; margin-top:72px; border:1px solid rgba(31,61,43,0.1); border-radius:8px; overflow:hidden; background:rgba(31,61,43,0.07);">
+        <div style="background:#F7F5F0; padding:36px 28px; text-align:center;">
+          <div style="font-family:'Playfair Display',serif; font-size:38px; font-weight:700; color:#C8A96A; margin-bottom:8px; letter-spacing:-0.02em;">$2B+</div>
+          <div style="font-size:13px; font-weight:500; color:#1F3D2B; letter-spacing:0.01em;">Estimated Industry Value Connected to Founding Team</div>
+        </div>
+        <div style="background:#F7F5F0; padding:36px 28px; text-align:center; border-left:1px solid rgba(31,61,43,0.08);">
+          <div style="font-family:'Playfair Display',serif; font-size:38px; font-weight:700; color:#C8A96A; margin-bottom:8px; letter-spacing:-0.02em;">40+</div>
+          <div style="font-size:13px; font-weight:500; color:#1F3D2B; letter-spacing:0.01em;">Years of Combined Landscape Executive Leadership</div>
+        </div>
+        <div style="background:#F7F5F0; padding:36px 28px; text-align:center; border-left:1px solid rgba(31,61,43,0.08);">
+          <div style="font-family:'Playfair Display',serif; font-size:38px; font-weight:700; color:#C8A96A; margin-bottom:8px; letter-spacing:-0.02em;">21+</div>
+          <div style="font-size:13px; font-weight:500; color:#1F3D2B; letter-spacing:0.01em;">Preferred Vendor &amp; Supplier Partnerships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       VALUE PROPOSITIONS
+  ════════════════════════════════════════════════ -->
+  <section id="benefits" style="background:#fff; padding:120px 24px;">
+    <div style="max-width:1140px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:72px;">
+        <span class="section-label" style="display:block; margin-bottom:16px;">Member Benefits</span>
+        <div class="gold-bar" style="margin:0 auto 28px;"></div>
+        <h2 class="section-heading" style="max-width:600px; margin:0 auto;">
+          Built for companies that are serious about growth
+        </h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:24px;">
+
+        <!-- Card 1 -->
+        <div class="value-card fade-up delay-1" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/><path d="M12 7v2m0 6v2m-2.5-8h4a1.5 1.5 0 010 3h-3a1.5 1.5 0 000 3h4"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">National Pricing Access</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Access vendor pricing typically reserved for national landscape companies with thousands of employees and hundreds of millions in purchasing volume.</p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="value-card fade-up delay-2" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">Better Margins</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Reduce your cost of goods and improve profitability without changing your operations, staff, or service model. Better pricing goes straight to your bottom line.</p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="value-card fade-up delay-3" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">Major Vendor Relationships</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Gain preferred access to the industry's leading suppliers — from equipment manufacturers to irrigation suppliers — through our established vendor network.</p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="value-card fade-up delay-1" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">Stronger Purchasing Leverage</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Your individual buying power multiplies when combined with member companies nationwide. The Collective's volume drives pricing that no single independent company could negotiate alone.</p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="value-card fade-up delay-2" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">Competitive Advantage</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Compete on price and operational efficiency with companies twice your size. Stop losing bids because your cost structure can't match a larger company's pricing power.</p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="value-card fade-up delay-3" style="padding:36px 32px;">
+          <div class="icon-wrap" style="margin-bottom:24px;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 20V10m0 0l-4 4m4-4l4 4"/><path d="M4 20h16"/><circle cx="12" cy="5" r="2"/>
+            </svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:600; color:#111; margin-bottom:12px; line-height:1.25;">Scalable Savings</h3>
+          <p style="font-size:14.5px; line-height:1.75; color:#555;">Pricing structures that grow with your business. The more volume you bring to your vendor relationships, the stronger your position within the Collective's preferred network.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOUNDERS
+  ════════════════════════════════════════════════ -->
+  <section id="founders" style="background:#1F3D2B; padding:120px 24px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:72px;">
+        <span class="section-label" style="display:block; margin-bottom:16px; color:rgba(200,169,106,0.8);">Founded By Industry Veterans</span>
+        <div class="gold-bar" style="margin:0 auto 28px;"></div>
+        <h2 class="section-heading section-heading-light" style="max-width:640px; margin:0 auto;">
+          Built by operators who have done it at scale
+        </h2>
+        <p style="font-size:16px; line-height:1.8; color:rgba(247,245,240,0.65); max-width:580px; margin:24px auto 0; font-weight:300;">
+          Landscaper Collective was founded by two landscape industry veterans who built small companies into national brands — and who understand exactly what it costs independent operators to compete.
+        </p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:28px;">
+
+        <!-- Brian -->
+        <div class="founder-card fade-up delay-1" style="padding:48px 40px;">
+          <div style="width:80px; height:80px; border-radius:50%; background:rgba(200,169,106,0.12); border:2px solid rgba(200,169,106,0.3); display:flex; align-items:center; justify-content:center; margin-bottom:28px;">
+            <span style="font-family:'Playfair Display',serif; font-size:30px; font-weight:600; color:#C8A96A;">BL</span>
+          </div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,169,106,0.7); margin-bottom:10px;">Co-Founder</div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:26px; font-weight:600; color:#F7F5F0; margin-bottom:6px;">Brian Lemmermann</h3>
+          <p style="font-size:13px; font-weight:500; color:#C8A96A; margin-bottom:24px; letter-spacing:0.01em;">Former Regional Vice President — Yellowstone Landscape</p>
+          <p style="font-size:14.5px; line-height:1.8; color:rgba(247,245,240,0.68);">
+            Brian built and scaled a residential landscape company into a recognized national brand before joining the executive leadership team at Yellowstone Landscape as Regional Vice President. Yellowstone is one of the top five largest landscape companies in the United States. He brings deep operational expertise, executive-level vendor relationships, and the firsthand experience of growing a landscape business from the ground up.
+          </p>
+        </div>
+
+        <!-- Jason -->
+        <div class="founder-card fade-up delay-2" style="padding:48px 40px;">
+          <div style="width:80px; height:80px; border-radius:50%; background:rgba(200,169,106,0.12); border:2px solid rgba(200,169,106,0.3); display:flex; align-items:center; justify-content:center; margin-bottom:28px;">
+            <span style="font-family:'Playfair Display',serif; font-size:30px; font-weight:600; color:#C8A96A;">JL</span>
+          </div>
+          <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,169,106,0.7); margin-bottom:10px;">Co-Founder</div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:26px; font-weight:600; color:#F7F5F0; margin-bottom:6px;">Jason Lamb</h3>
+          <p style="font-size:13px; font-weight:500; color:#C8A96A; margin-bottom:24px; letter-spacing:0.01em;">Former CFO — United Landscape</p>
+          <p style="font-size:14.5px; line-height:1.8; color:rgba(247,245,240,0.68);">
+            Jason served as CFO of United Landscape, where his financial leadership helped shape one of the most operationally sophisticated landscape enterprises in the country. United Landscape is among the top landscape companies nationally, representing hundreds of millions in annual revenue. Jason brings a CFO-level perspective to vendor negotiations, margin strategy, and the purchasing structures that drive real profitability for landscape operators.
+          </p>
+        </div>
+      </div>
+
+      <!-- Combined credibility bar -->
+      <div class="fade-up delay-3" style="margin-top:48px; padding:32px 40px; border:1px solid rgba(200,169,106,0.15); border-radius:8px; background:rgba(255,255,255,0.03); display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+        <div style="width:40px; height:40px; flex-shrink:0; background:rgba(200,169,106,0.12); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#C8A96A" stroke-width="1.6"><path d="M10 2l2 6h6l-5 4 2 6-5-4-5 4 2-6-5-4h6z"/></svg>
+        </div>
+        <p style="font-size:14px; line-height:1.7; color:rgba(247,245,240,0.65); flex:1; min-width:200px;">
+          The founding team's combined experience connects to organizations representing an estimated <strong style="color:#C8A96A; font-weight:600;">$2 billion or more</strong> in landscape industry value — and direct relationships with the vendors, suppliers, and pricing structures that define the industry's national players.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       HOW IT WORKS
+  ════════════════════════════════════════════════ -->
+  <section id="how-it-works" style="background:#F7F5F0; padding:120px 24px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:72px;">
+        <span class="section-label" style="display:block; margin-bottom:16px;">The Process</span>
+        <div class="gold-bar" style="margin:0 auto 28px;"></div>
+        <h2 class="section-heading" style="max-width:500px; margin:0 auto;">Three steps to better purchasing</h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:28px; position:relative;">
+
+        <!-- Step 1 -->
+        <div class="fade-up delay-1" style="background:#fff; border:1px solid rgba(31,61,43,0.07); border-radius:8px; padding:44px 36px; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+          <div style="font-family:'Playfair Display',serif; font-size:56px; font-weight:700; color:rgba(200,169,106,0.2); line-height:1; margin-bottom:20px; letter-spacing:-0.04em;">01</div>
+          <div style="width:44px; height:44px; background:#1F3D2B; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:24px;">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C8A96A" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="8" r="4"/><path d="M3 20c0-4.4 3.6-8 8-8s8 3.6 8 8"/><path d="M16 5l2 2 3-3" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:#111; margin-bottom:14px;">Join the Collective</h3>
+          <p style="font-size:14.5px; line-height:1.78; color:#555;">Apply online and complete member onboarding. We verify your business, align your vendor accounts, and connect you to our preferred pricing network. The process is straightforward — designed for operators, not administrators.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="fade-up delay-2" style="background:#fff; border:1px solid rgba(31,61,43,0.07); border-radius:8px; padding:44px 36px; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+          <div style="font-family:'Playfair Display',serif; font-size:56px; font-weight:700; color:rgba(200,169,106,0.2); line-height:1; margin-bottom:20px; letter-spacing:-0.04em;">02</div>
+          <div style="width:44px; height:44px; background:#1F3D2B; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:24px;">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C8A96A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="16" height="8" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/><circle cx="11" cy="15" r="1" fill="#C8A96A" stroke="none"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:#111; margin-bottom:14px;">Access Preferred Pricing</h3>
+          <p style="font-size:14.5px; line-height:1.78; color:#555;">Purchase from major vendors and suppliers at national rates. Discounts are applied through your existing accounts — no middleman, no markups, no added complexity. You buy directly; we've negotiated the terms.</p>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="fade-up delay-3" style="background:#fff; border:1px solid rgba(31,61,43,0.07); border-radius:8px; padding:44px 36px; box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+          <div style="font-family:'Playfair Display',serif; font-size:56px; font-weight:700; color:rgba(200,169,106,0.2); line-height:1; margin-bottom:20px; letter-spacing:-0.04em;">03</div>
+          <div style="width:44px; height:44px; background:#1F3D2B; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-bottom:24px;">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#C8A96A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 6 13.5 14.5 8.5 9.5 1 17"/><polyline points="16 6 22 6 22 12"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:22px; font-weight:600; color:#111; margin-bottom:14px;">Improve Profitability</h3>
+          <p style="font-size:14.5px; line-height:1.78; color:#555;">Lower your cost of goods sold. Improve your margins on every job. Compete more effectively on price without sacrificing quality. Reinvest the savings into equipment, staff, or growth — that decision is yours.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       VENDOR NETWORK
+  ════════════════════════════════════════════════ -->
+  <section id="vendors" style="background:#fff; padding:120px 24px;">
+    <div style="max-width:1100px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:56px;">
+        <span class="section-label" style="display:block; margin-bottom:16px;">Preferred Vendor Network</span>
+        <div class="gold-bar" style="margin:0 auto 28px;"></div>
+        <h2 class="section-heading" style="max-width:560px; margin:0 auto 20px;">Industry-leading vendors. Negotiated pricing.</h2>
+        <p style="font-size:16px; line-height:1.75; color:#555; max-width:540px; margin:0 auto;">
+          Our preferred vendor network spans every major category of landscape procurement — from mowers and equipment to irrigation, supplies, and technology.
+        </p>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="fade-up delay-1">
+        <div class="vendor-tab-bar" style="display:flex; gap:8px; overflow-x:auto; padding:4px 2px; margin-bottom:40px;">
+          <button class="vendor-tab active" data-tab="all">All Vendors</button>
+          <button class="vendor-tab" data-tab="mowers">Mowers &amp; Equipment</button>
+          <button class="vendor-tab" data-tab="irrigation">Irrigation</button>
+          <button class="vendor-tab" data-tab="robotics">Robotics &amp; Tech</button>
+          <button class="vendor-tab" data-tab="power">Power Equipment</button>
+          <button class="vendor-tab" data-tab="supplies">Supplies &amp; Materials</button>
+        </div>
+      </div>
+
+      <!-- Vendor grid -->
+      <div class="fade-up delay-2" id="vendor-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:16px;">
+
+        <!-- MOWERS & EQUIPMENT -->
+        <div class="vendor-item featured" data-category="mowers" style="padding:22px 20px;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:10px;">
+            <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center;">
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="5" cy="14" r="2"/><circle cx="13" cy="14" r="2"/><path d="M3 14H2l-1-6h14l1 4H7M7 8V4h6l2 4"/></svg>
+            </div>
+            <span style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#1F3D2B; background:rgba(200,169,106,0.18); border:1px solid rgba(200,169,106,0.35); padding:3px 8px; border-radius:100px;">Up to 27% off</span>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Hustler Mowers</div>
+          <div style="font-size:12px; color:#888;">Commercial &amp; residential mowers</div>
+        </div>
+
+        <div class="vendor-item" data-category="mowers" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="5" cy="14" r="2"/><circle cx="13" cy="14" r="2"/><path d="M3 14H2l-1-6h14l1 4H7M7 8V4h6l2 4"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Wright Mowers</div>
+          <div style="font-size:12px; color:#888;">Stand-on &amp; commercial mowers</div>
+        </div>
+
+        <div class="vendor-item" data-category="mowers" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="5" cy="14" r="2"/><circle cx="13" cy="14" r="2"/><path d="M3 14H2l-1-6h14l1 4H7M7 8V4h6l2 4"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Walker Mowers</div>
+          <div style="font-size:12px; color:#888;">Premium lawn maintenance</div>
+        </div>
+
+        <div class="vendor-item" data-category="mowers" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="5" cy="14" r="2"/><circle cx="13" cy="14" r="2"/><path d="M3 14H2l-1-6h14l1 4H7M7 8V4h6l2 4"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Exmark Mowers</div>
+          <div style="font-size:12px; color:#888;">Zero-turn &amp; stand-on</div>
+        </div>
+
+        <div class="vendor-item" data-category="mowers" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="1" y="8" width="16" height="7" rx="2"/><path d="M5 8V5a4 4 0 018 0v3"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">John Deere Equipment</div>
+          <div style="font-size:12px; color:#888;">Mowers, utility vehicles &amp; more</div>
+        </div>
+
+        <div class="vendor-item" data-category="mowers" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="1" y="8" width="16" height="7" rx="2"/><path d="M5 8V5a4 4 0 018 0v3"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Bobcat</div>
+          <div style="font-size:12px; color:#888;">Compact equipment &amp; loaders</div>
+        </div>
+
+        <!-- IRRIGATION -->
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/><path d="M9 17v-4M6 13l3 2"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">SiteOne Landscape Supply</div>
+          <div style="font-size:12px; color:#888;">Full-service landscape supply</div>
+        </div>
+
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Ewing Irrigation</div>
+          <div style="font-size:12px; color:#888;">Irrigation &amp; outdoor living</div>
+        </div>
+
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Horizon Irrigation</div>
+          <div style="font-size:12px; color:#888;">Irrigation distribution</div>
+        </div>
+
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Rain Bird</div>
+          <div style="font-size:12px; color:#888;">Irrigation products &amp; systems</div>
+        </div>
+
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Irritrol</div>
+          <div style="font-size:12px; color:#888;">Valves, controllers &amp; heads</div>
+        </div>
+
+        <div class="vendor-item" data-category="irrigation" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="2" y="5" width="14" height="10" rx="2"/><path d="M5 5V3h8v2"/><circle cx="9" cy="10" r="1.5" fill="#1F3D2B" stroke="none"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Thrive Irrigation Controllers</div>
+          <div style="font-size:12px; color:#888;">Smart irrigation technology</div>
+        </div>
+
+        <!-- ROBOTICS & TECH -->
+        <div class="vendor-item" data-category="robotics" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="4" y="7" width="10" height="8" rx="2"/><path d="M7 7V5a2 2 0 014 0v2"/><circle cx="9" cy="11" r="1" fill="#1F3D2B" stroke="none"/><path d="M6 15v2M12 15v2"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Husqvarna Robotics</div>
+          <div style="font-size:12px; color:#888;">Autonomous mowing technology</div>
+        </div>
+
+        <div class="vendor-item" data-category="robotics" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="2" y="3" width="14" height="10" rx="2"/><path d="M6 17h6M9 13v4"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Landscape Software</div>
+          <div style="font-size:12px; color:#888;">Business management &amp; CRM</div>
+        </div>
+
+        <!-- POWER EQUIPMENT -->
+        <div class="vendor-item" data-category="power" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M13 5H5l-2 8h12l-2-8zM9 13v3M6 16h6"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Stihl</div>
+          <div style="font-size:12px; color:#888;">Chainsaws, trimmers &amp; blowers</div>
+        </div>
+
+        <div class="vendor-item" data-category="power" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M13 5H5l-2 8h12l-2-8zM9 13v3M6 16h6"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Honda</div>
+          <div style="font-size:12px; color:#888;">Power equipment &amp; engines</div>
+        </div>
+
+        <div class="vendor-item" data-category="power" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><rect x="1" y="8" width="16" height="7" rx="2"/><path d="M5 8V5a4 4 0 018 0v3"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Caterpillar</div>
+          <div style="font-size:12px; color:#888;">Heavy equipment &amp; machines</div>
+        </div>
+
+        <!-- SUPPLIES & MATERIALS -->
+        <div class="vendor-item" data-category="supplies" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M3 9l6-6 6 6v7a1 1 0 01-1 1H4a1 1 0 01-1-1V9z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Home Depot</div>
+          <div style="font-size:12px; color:#888;">Building materials &amp; supplies</div>
+        </div>
+
+        <div class="vendor-item" data-category="supplies" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><path d="M9 2C9 2 3 8 3 12a6 6 0 0012 0c0-4-6-10-6-10z"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Fimco</div>
+          <div style="font-size:12px; color:#888;">Sprayers &amp; application equipment</div>
+        </div>
+
+        <div class="vendor-item" data-category="supplies" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="9" cy="9" r="6"/><path d="M9 6v3l2 2"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Fertilizers &amp; Nutrients</div>
+          <div style="font-size:12px; color:#888;">Professional-grade products</div>
+        </div>
+
+        <div class="vendor-item" data-category="supplies" style="padding:22px 20px;">
+          <div style="width:38px; height:38px; background:rgba(31,61,43,0.06); border-radius:8px; display:flex; align-items:center; justify-content:center; margin-bottom:10px;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#1F3D2B" stroke-width="1.5"><circle cx="9" cy="9" r="3"/><path d="M9 3v2M9 13v2M3 9h2M13 9h2M4.93 4.93l1.41 1.41M11.66 11.66l1.41 1.41M4.93 13.07l1.41-1.41M11.66 6.34l1.41-1.41"/></svg>
+          </div>
+          <div style="font-family:'Playfair Display',serif; font-size:15px; font-weight:600; color:#111; margin-bottom:4px;">Low Voltage Lighting</div>
+          <div style="font-size:12px; color:#888;">Outdoor &amp; landscape lighting</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       WHY JOIN
+  ════════════════════════════════════════════════ -->
+  <section id="why-join" style="background:#1F3D2B; padding:120px 24px;">
+    <div class="why-join-grid" style="max-width:1100px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;">
+
+      <!-- Left: copy -->
+      <div class="fade-up">
+        <span class="section-label" style="display:block; margin-bottom:16px; color:rgba(200,169,106,0.8);">Why Join</span>
+        <div class="gold-bar" style="margin-bottom:28px;"></div>
+        <h2 class="section-heading section-heading-light" style="margin-bottom:32px;">
+          Stop buying at retail.<br>
+          <em style="font-style:italic; color:#C8A96A;">Start buying like a national company.</em>
+        </h2>
+        <p style="font-size:16px; line-height:1.8; color:rgba(247,245,240,0.68); margin-bottom:44px; font-weight:300;">
+          Every independent landscape company faces the same reality: you're paying more for equipment, materials, and supplies than your largest competitors — simply because of volume. Landscaper Collective levels the playing field.
+        </p>
+
+        <div style="display:flex; flex-direction:column; gap:20px;">
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">Stop paying retail or near-retail for equipment and materials that drive your cost structure</p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">Access the same national pricing that the industry's largest companies leverage to win bids and build margin</p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">No minimum purchase requirements to join — designed to work with your existing purchasing habits</p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">Works through your existing vendor accounts — no middlemen, no markups, no friction added to your operations</p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">Founded by operators who understand margins, purchasing, and what it actually takes to grow a landscape company</p>
+          </div>
+          <div style="display:flex; align-items:flex-start; gap:16px;">
+            <div style="width:24px; height:24px; background:rgba(200,169,106,0.15); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6l3 3 5-5" stroke="#C8A96A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p style="font-size:15px; line-height:1.7; color:rgba(247,245,240,0.78);">Scale your savings as your business grows — the Collective gets stronger, and so does your position within it</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: callout box -->
+      <div class="fade-up delay-2">
+        <div style="background:rgba(255,255,255,0.04); border:1px solid rgba(200,169,106,0.18); border-radius:12px; padding:48px 40px;">
+          <div style="font-family:'Playfair Display',serif; font-size:18px; font-weight:600; color:#F7F5F0; margin-bottom:24px; line-height:1.4;">"You've built a real business. Now it's time to buy like the biggest players in the industry do."</div>
+          <p style="font-size:14.5px; line-height:1.8; color:rgba(247,245,240,0.62); margin-bottom:36px;">Independent landscape companies lose margin every single day to pricing structures they can't change alone. The Collective changes that — permanently, and without asking you to give up a thing.</p>
+
+          <div style="border-top:1px solid rgba(200,169,106,0.15); padding-top:32px; display:flex; flex-direction:column; gap:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:rgba(247,245,240,0.55); font-weight:400;">Equipment discount range</span>
+              <span style="font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#C8A96A;">Up to 27%</span>
+            </div>
+            <div style="width:100%; height:1px; background:rgba(200,169,106,0.08);"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:rgba(247,245,240,0.55); font-weight:400;">Vendor categories covered</span>
+              <span style="font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#C8A96A;">5+</span>
+            </div>
+            <div style="width:100%; height:1px; background:rgba(200,169,106,0.08);"></div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:13px; color:rgba(247,245,240,0.55); font-weight:400;">Preferred vendor partners</span>
+              <span style="font-family:'Playfair Display',serif; font-size:22px; font-weight:700; color:#C8A96A;">21+</span>
+            </div>
+          </div>
+
+          <a href="#contact" class="btn-gold" style="margin-top:36px; width:100%; justify-content:center; padding:14px; font-size:15px;">
+            Apply for Membership
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       CTA BANNER
+  ════════════════════════════════════════════════ -->
+  <section style="background:#111111; padding:100px 24px;">
+    <div style="max-width:800px; margin:0 auto; text-align:center;">
+      <div class="fade-up" style="display:flex; flex-direction:column; align-items:center; gap:16px; margin-bottom:40px;">
+        <span class="section-label" style="color:rgba(200,169,106,0.7);">Get Started</span>
+        <div class="gold-bar"></div>
+      </div>
+      <h2 class="section-heading section-heading-light fade-up delay-1" style="margin-bottom:24px; font-size:clamp(32px,5vw,60px);">
+        Put national buying power<br>behind your business.
+      </h2>
+      <p class="fade-up delay-2" style="font-size:17px; line-height:1.8; color:rgba(247,245,240,0.62); margin-bottom:44px; font-weight:300;">
+        You've built something real. Now it's time to purchase like the largest companies in the industry. Landscaper Collective gives independently owned landscape companies the pricing, leverage, and vendor relationships that were previously out of reach.
+      </p>
+      <div class="fade-up delay-3" style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="#contact" class="btn-gold" style="padding:14px 36px; font-size:15px;">
+          Apply Now
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#about" class="btn-outline-gold" style="padding:13px 36px; font-size:15px;">Learn More</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       APPLICATION FORM
+  ════════════════════════════════════════════════ -->
+  <section id="contact" style="background:#F7F5F0; padding:120px 24px;">
+    <div style="max-width:880px; margin:0 auto;">
+      <div class="fade-up" style="text-align:center; margin-bottom:64px;">
+        <span class="section-label" style="display:block; margin-bottom:16px;">Membership Application</span>
+        <div class="gold-bar" style="margin:0 auto 28px;"></div>
+        <h2 class="section-heading" style="margin-bottom:20px;">Apply to Join the Collective</h2>
+        <p style="font-size:16px; line-height:1.75; color:#555; max-width:480px; margin:0 auto;">Tell us about your business and we'll be in touch to discuss membership and how the Collective can improve your purchasing.</p>
+      </div>
+
+      <!-- Form card -->
+      <div class="fade-up delay-1 form-card" style="background:#fff; border:1px solid rgba(31,61,43,0.08); border-radius:10px; box-shadow:0 4px 32px rgba(0,0,0,0.06); padding:56px 48px;" id="form-container">
+
+        <form id="application-form" novalidate>
+          <div class="form-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px 24px;">
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="name">Full Name *</label>
+              <input class="form-input" type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name" />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="company">Company Name *</label>
+              <input class="form-input" type="text" id="company" name="company" placeholder="Smith Landscape Co." required />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="email">Email Address *</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="jane@smithlandscape.com" required autocomplete="email" />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="phone">Phone Number</label>
+              <input class="form-input" type="tel" id="phone" name="phone" placeholder="(555) 000-0000" autocomplete="tel" />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="location">City &amp; State *</label>
+              <input class="form-input" type="text" id="location" name="location" placeholder="Austin, TX" required />
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <label for="employees">Number of Employees</label>
+              <select class="form-input" id="employees" name="employees" style="appearance:none; cursor:pointer; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231F3D2B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;">
+                <option value="" disabled selected>Select range</option>
+                <option value="1-5">1–5 employees</option>
+                <option value="6-15">6–15 employees</option>
+                <option value="16-30">16–30 employees</option>
+                <option value="31-50">31–50 employees</option>
+                <option value="51-100">51–100 employees</option>
+                <option value="100+">100+ employees</option>
+              </select>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
+              <label for="spend">Annual Vendor Spend</label>
+              <select class="form-input" id="spend" name="spend" style="appearance:none; cursor:pointer; background-image:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231F3D2B' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px;">
+                <option value="" disabled selected>Estimated annual spend with vendors</option>
+                <option value="under-50k">Under $50,000</option>
+                <option value="50k-150k">$50,000 – $150,000</option>
+                <option value="150k-500k">$150,000 – $500,000</option>
+                <option value="500k-1m">$500,000 – $1,000,000</option>
+                <option value="1m+">$1,000,000+</option>
+              </select>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; grid-column:1 / -1;">
+              <label for="message">Tell us about your business</label>
+              <textarea class="form-input" id="message" name="message" rows="4" placeholder="Share a bit about your services, vendor relationships, and what you're looking to improve..." style="resize:vertical; min-height:100px;"></textarea>
+            </div>
+
+          </div>
+
+          <!-- Error message -->
+          <div id="form-error" style="display:none; margin-top:20px; padding:14px 18px; background:rgba(200,60,60,0.06); border:1px solid rgba(200,60,60,0.2); border-radius:5px;">
+            <p style="font-size:13.5px; color:#c03c3c; font-family:'Inter',sans-serif;">Please fill in all required fields before submitting.</p>
+          </div>
+
+          <button type="submit" class="btn-gold" style="margin-top:32px; padding:15px 36px; font-size:15px; width:100%; justify-content:center;">
+            Submit Application
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+
+          <p style="font-size:12px; color:#999; text-align:center; margin-top:16px; line-height:1.6; font-family:'Inter',sans-serif;">
+            By submitting this form, you agree to be contacted by Landscaper Collective regarding membership. We do not share your information with third parties.
+          </p>
+        </form>
+
+        <!-- Success state -->
+        <div id="form-success" style="flex-direction:column; align-items:center; text-align:center; padding:32px 0;">
+          <div style="width:64px; height:64px; background:rgba(31,61,43,0.08); border-radius:50%; display:flex; align-items:center; justify-content:center; margin-bottom:24px;">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M5 15l7 7 13-13" stroke="#1F3D2B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif; font-size:28px; font-weight:600; color:#1F3D2B; margin-bottom:14px;">Application Received</h3>
+          <p style="font-size:15px; line-height:1.75; color:#555; max-width:400px; margin:0 auto;">Thank you for your interest in Landscaper Collective. Our team will review your application and be in touch within 1–2 business days.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ════════════════════════════════════════════════ -->
+  <footer style="background:#0d1f14; padding:72px 24px 40px;">
+    <div style="max-width:1140px; margin:0 auto;">
+
+      <!-- Top row -->
+      <div class="footer-grid" style="display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:48px; padding-bottom:56px; border-bottom:1px solid rgba(200,169,106,0.1);">
+
+        <!-- Brand column -->
+        <div>
+          <a href="#" style="text-decoration:none; display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+            <svg width="26" height="26" viewBox="0 0 28 28" fill="none">
+              <path d="M14 2C14 2 4 8 4 16C4 21.52 8.48 26 14 26C19.52 26 24 21.52 24 16C24 8 14 2 14 2Z" fill="#C8A96A" opacity="0.85"/>
+              <path d="M14 26V14" stroke="#0d1f14" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M14 18L10 14" stroke="#0d1f14" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family:'Playfair Display',serif; font-size:17px; font-weight:600; color:#F7F5F0;">Landscaper <span style="color:#C8A96A;">Collective</span></span>
+          </a>
+          <p style="font-size:14px; line-height:1.8; color:rgba(247,245,240,0.48); max-width:280px; font-weight:300;">National buying power for independent landscape companies. Access the pricing. Improve the margins. Compete smarter.</p>
+          <div style="margin-top:24px; display:flex; gap:12px;">
+            <a href="mailto:info@landscapercollective.com" style="font-size:13px; color:rgba(200,169,106,0.7); text-decoration:none; font-family:'Inter',sans-serif; font-weight:400; transition:color 0.2s;" onmouseover="this.style.color='#C8A96A'" onmouseout="this.style.color='rgba(200,169,106,0.7)'">info@landscapercollective.com</a>
+          </div>
+        </div>
+
+        <!-- Quick links -->
+        <div>
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,169,106,0.6); margin-bottom:20px;">Navigation</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <a href="#about"        style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">About</a>
+            <a href="#benefits"     style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">Member Benefits</a>
+            <a href="#vendors"      style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">Vendor Network</a>
+            <a href="#founders"     style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">Our Founders</a>
+            <a href="#how-it-works" style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">How It Works</a>
+            <a href="#contact"      style="font-size:14px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; transition:color 0.2s;" onmouseover="this.style.color='#F7F5F0'" onmouseout="this.style.color='rgba(247,245,240,0.55)'">Apply Now</a>
+          </div>
+        </div>
+
+        <!-- Vendor categories -->
+        <div>
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,169,106,0.6); margin-bottom:20px;">Vendor Categories</div>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <span style="font-size:14px; color:rgba(247,245,240,0.48); font-family:'Inter',sans-serif;">Mowers &amp; Equipment</span>
+            <span style="font-size:14px; color:rgba(247,245,240,0.48); font-family:'Inter',sans-serif;">Irrigation Systems</span>
+            <span style="font-size:14px; color:rgba(247,245,240,0.48); font-family:'Inter',sans-serif;">Robotics &amp; Technology</span>
+            <span style="font-size:14px; color:rgba(247,245,240,0.48); font-family:'Inter',sans-serif;">Power Equipment</span>
+            <span style="font-size:14px; color:rgba(247,245,240,0.48); font-family:'Inter',sans-serif;">Supplies &amp; Materials</span>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(200,169,106,0.6); margin-bottom:20px;">Contact</div>
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div>
+              <div style="font-size:11px; font-weight:600; color:rgba(200,169,106,0.5); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px;">Email</div>
+              <a href="mailto:info@landscapercollective.com" style="font-size:13.5px; color:rgba(247,245,240,0.55); text-decoration:none; font-family:'Inter',sans-serif; word-break:break-all;">info@landscapercollective.com</a>
+            </div>
+            <div>
+              <div style="font-size:11px; font-weight:600; color:rgba(200,169,106,0.5); letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px;">Membership</div>
+              <a href="#contact" class="btn-gold" style="font-size:13px; padding:8px 18px; display:inline-flex;">Apply Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div style="padding-top:28px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+        <p style="font-size:12px; color:rgba(247,245,240,0.3); font-family:'Inter',sans-serif;">© 2025 Landscaper Collective. All rights reserved.</p>
+        <p style="font-size:12px; color:rgba(247,245,240,0.2); font-family:'Inter',sans-serif;">National Buying Association for Landscape Companies</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       AI CHAT WIDGET
+  ════════════════════════════════════════════════ -->
+  <div id="chat-widget" aria-label="Chat assistant">
+
+    <!-- Chat window -->
+    <div id="chat-window" class="chat-hidden" role="dialog" aria-label="Landscaper Collective AI Assistant">
+
+      <!-- Header -->
+      <div style="padding:14px 16px; display:flex; align-items:center; justify-content:space-between; background:rgba(200,169,106,0.08); border-bottom:1px solid rgba(200,169,106,0.18); flex-shrink:0;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div style="width:38px; height:38px; background:#C8A96A; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 1C4.58 1 1 4.26 1 8.25c0 2.17 1.04 4.12 2.68 5.46L3 16l2.6-1.3A8.4 8.4 0 009 15.5c4.42 0 8-3.26 8-7.25S13.42 1 9 1z" fill="#1F3D2B"/></svg>
+          </div>
+          <div>
+            <div style="font-family:'Inter',sans-serif; font-size:13px; font-weight:600; color:#C8A96A; line-height:1.2;">Collective Assistant</div>
+            <div style="font-family:'Inter',sans-serif; font-size:11px; color:rgba(200,169,106,0.55); display:flex; align-items:center; gap:5px;">
+              <span style="width:6px; height:6px; background:#4ade80; border-radius:50%; display:inline-block;"></span>Online
+            </div>
+          </div>
+        </div>
+        <button id="chat-close" aria-label="Close chat" style="width:30px; height:30px; border-radius:50%; background:rgba(200,169,106,0.1); border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; color:rgba(200,169,106,0.7); transition:background 0.2s;" onmouseover="this.style.background='rgba(200,169,106,0.18)'" onmouseout="this.style.background='rgba(200,169,106,0.1)'">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+
+      <!-- Messages -->
+      <div id="chat-messages">
+        <div class="chat-bubble chat-bubble-ai">
+          Hi there! I'm the Landscaper Collective assistant. Ask me anything about our buying association, vendor partners, membership, or how we help landscape companies buy smarter.
+        </div>
+      </div>
+
+      <!-- Input row -->
+      <div style="padding:12px 14px; border-top:1px solid rgba(200,169,106,0.15); background:rgba(200,169,106,0.04); display:flex; align-items:center; gap:10px; flex-shrink:0;">
+        <input id="chat-input" type="text" placeholder="Ask a question…" autocomplete="off" />
+        <button id="chat-send" aria-label="Send message">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M14 8H2M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Toggle button -->
+    <button id="chat-toggle" aria-label="Open chat assistant" aria-expanded="false">
+      <!-- Chat icon (default) -->
+      <svg id="icon-chat" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C6.03 2 2 5.69 2 10.25c0 2.55 1.2 4.84 3.1 6.41L4.5 20l3.1-1.55A9.5 9.5 0 0011 18.5c4.97 0 9-3.69 9-8.25S15.97 2 11 2z" fill="currentColor"/></svg>
+      <!-- X icon (open state) -->
+      <svg id="icon-close" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display:none;"><path d="M2 2l16 16M18 2L2 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <script>
+    // ─── NAVBAR SCROLL ───────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ─── MOBILE MENU ─────────────────────────────────────────────
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const hamBars = hamburger.querySelectorAll('.ham-bar');
+    let menuOpen = false;
+
+    hamburger.addEventListener('click', () => {
+      menuOpen = !menuOpen;
+      hamburger.setAttribute('aria-expanded', menuOpen);
+      mobileMenu.classList.toggle('hidden-menu', !menuOpen);
+      mobileMenu.classList.toggle('open-menu', menuOpen);
+      // Animate hamburger → X
+      if (menuOpen) {
+        hamBars[0].style.transform = 'translateY(6.5px) rotate(45deg)';
+        hamBars[1].style.opacity = '0';
+        hamBars[2].style.transform = 'translateY(-6.5px) rotate(-45deg)';
+      } else {
+        hamBars[0].style.transform = '';
+        hamBars[1].style.opacity = '';
+        hamBars[2].style.transform = '';
+      }
+    });
+
+    // Close mobile menu when a link is clicked
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menuOpen = false;
+        hamburger.setAttribute('aria-expanded', false);
+        mobileMenu.classList.add('hidden-menu');
+        mobileMenu.classList.remove('open-menu');
+        hamBars[0].style.transform = '';
+        hamBars[1].style.opacity = '';
+        hamBars[2].style.transform = '';
+      });
+    });
+
+    // ─── SCROLL ANIMATIONS ───────────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // ─── VENDOR TABS ─────────────────────────────────────────────
+    const tabs = document.querySelectorAll('.vendor-tab');
+    const vendorItems = document.querySelectorAll('#vendor-grid [data-category]');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const selected = tab.dataset.tab;
+        vendorItems.forEach(item => {
+          const show = selected === 'all' || item.dataset.category === selected;
+          item.style.display = show ? '' : 'none';
+        });
+      });
+    });
+
+    // ─── AI CHAT WIDGET ──────────────────────────────────────────
+    const chatToggle   = document.getElementById('chat-toggle');
+    const chatClose    = document.getElementById('chat-close');
+    const chatWindow   = document.getElementById('chat-window');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput    = document.getElementById('chat-input');
+    const chatSend     = document.getElementById('chat-send');
+    const iconChat     = document.getElementById('icon-chat');
+    const iconClose    = document.getElementById('icon-close');
+
+    let chatOpen = false;
+    let chatHistory = []; // [{role:'user'|'assistant', content:'...'}]
+    let chatBusy = false;
+
+    function openChat() {
+      chatOpen = true;
+      chatWindow.classList.remove('chat-hidden');
+      chatWindow.classList.add('chat-visible');
+      chatToggle.classList.add('open');
+      chatToggle.setAttribute('aria-expanded', 'true');
+      iconChat.style.display = 'none';
+      iconClose.style.display = 'block';
+      setTimeout(() => chatInput.focus(), 150);
+    }
+    function closeChat() {
+      chatOpen = false;
+      chatWindow.classList.remove('chat-visible');
+      chatWindow.classList.add('chat-hidden');
+      chatToggle.classList.remove('open');
+      chatToggle.setAttribute('aria-expanded', 'false');
+      iconChat.style.display = 'block';
+      iconClose.style.display = 'none';
+    }
+
+    chatToggle.addEventListener('click', () => chatOpen ? closeChat() : openChat());
+    chatClose.addEventListener('click', closeChat);
+
+    function scrollBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function addBubble(text, role) {
+      const div = document.createElement('div');
+      div.className = 'chat-bubble ' + (role === 'user' ? 'chat-bubble-user' : 'chat-bubble-ai');
+      div.textContent = text;
+      chatMessages.appendChild(div);
+      scrollBottom();
+      return div;
+    }
+
+    function showTyping() {
+      const div = document.createElement('div');
+      div.className = 'chat-typing';
+      div.id = 'chat-typing';
+      div.innerHTML = '<span></span><span></span><span></span>';
+      chatMessages.appendChild(div);
+      scrollBottom();
+    }
+    function removeTyping() {
+      const el = document.getElementById('chat-typing');
+      if (el) el.remove();
+    }
+
+    async function sendMessage() {
+      const text = chatInput.value.trim();
+      if (!text || chatBusy) return;
+
+      chatBusy = true;
+      chatInput.value = '';
+      chatSend.disabled = true;
+
+      addBubble(text, 'user');
+      chatHistory.push({ role: 'user', content: text });
+      showTyping();
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ messages: chatHistory }),
+        });
+        const data = await res.json();
+        removeTyping();
+
+        if (data.error) {
+          addBubble('Sorry, I ran into an issue: ' + data.error, 'ai');
+        } else {
+          addBubble(data.response, 'ai');
+          chatHistory.push({ role: 'assistant', content: data.response });
+        }
+      } catch {
+        removeTyping();
+        addBubble('Sorry, I couldn\'t connect. Please try again in a moment.', 'ai');
+      } finally {
+        chatBusy = false;
+        chatSend.disabled = false;
+        chatInput.focus();
+      }
+    }
+
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    // ─── FORM SUBMISSION ─────────────────────────────────────────
+    const form = document.getElementById('application-form');
+    const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      formError.style.display = 'none';
+
+      // Validate required fields
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          valid = false;
+          field.style.borderColor = 'rgba(200,60,60,0.5)';
+          field.addEventListener('input', () => {
+            field.style.borderColor = '';
+          }, { once: true });
+        }
+      });
+
+      if (!valid) {
+        formError.style.display = 'block';
+        return;
+      }
+
+      // Show success
+      form.style.opacity = '0';
+      form.style.transform = 'scale(0.98)';
+      form.style.transition = 'opacity 0.3s, transform 0.3s';
+      setTimeout(() => {
+        form.style.display = 'none';
+        formSuccess.classList.add('visible');
+        formSuccess.style.opacity = '0';
+        formSuccess.style.transform = 'translateY(8px)';
+        formSuccess.style.transition = 'opacity 0.4s, transform 0.4s';
+        requestAnimationFrame(() => {
+          formSuccess.style.opacity = '1';
+          formSuccess.style.transform = 'translateY(0)';
+        });
+      }, 300);
+    });
+  </script>
+</body>
+</html>
