@@ -426,13 +426,21 @@
     /* ─── SECTION PADDING ─── */
     .sec { padding: 120px 24px; }
 
+    /* ─── HERO LAYOUT (kept in CSS so media queries work — inline styles can't be overridden by @media) ─── */
+    .hero-section {
+      display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding: 120px 24px 80px;
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 768px) {
       /* Disable scroll-in animations on mobile — prevents blank green flash on dark sections */
       .fade-up { opacity: 1 !important; transform: none !important; transition: none !important; }
 
-      /* Hero: kill forced full-height + centering — those create a blank green void below content on mobile */
-      .hero-bg       { min-height: unset !important; align-items: flex-start !important; padding: 112px 20px 64px !important; }
+      /* Hero: no forced full-height, no centering — prevents blank green void below content */
+      .hero-section  { min-height: 0; align-items: flex-start; padding: 108px 20px 56px; }
       .hero-scroll-cue { display: none !important; }
 
       /* Sections */
@@ -444,7 +452,7 @@
       #chat-window   { width: min(360px, calc(100vw - 32px)) !important; }
     }
     @media (max-width: 480px) {
-      .hero-bg       { padding: 80px 16px 40px !important; }
+      .hero-section  { padding: 88px 16px 40px; }
       .sec           { padding: 48px 16px !important; }
       .footer-grid   { grid-template-columns: 1fr !important; }
       #chat-window   { width: calc(100vw - 24px) !important; }
@@ -629,7 +637,7 @@
   <!-- ═══════════════════════════════════════════
        HERO
   ════════════════════════════════════════════════ -->
-  <section class="hero-bg" style="min-height:100vh; display:flex; align-items:center; padding:120px 24px 80px;">
+  <section class="hero-bg hero-section">
     <div class="hero-glow"></div>
     <div class="hero-overlay"></div>
     <div style="position:relative; z-index:10; max-width:880px; margin:0 auto; text-align:center;">
